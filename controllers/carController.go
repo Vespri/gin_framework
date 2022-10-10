@@ -9,9 +9,9 @@ import (
 
 type Car struct {
 	CarID string `json:"car_id"`
-	Brand string `json:"branc"`
+	Brand string `json:"brand"`
 	Model string `json:"model"`
-	Price string `json:"price"`
+	Price int    `json:"price"`
 }
 
 var CarDatas = []Car{}
@@ -46,6 +46,7 @@ func UpdateCar(ctx *gin.Context) {
 		if carID == car.CarID {
 			condition = true
 			CarDatas[i] = updateCar
+			CarDatas[i].CarID = carID
 			break
 		}
 	}
@@ -71,6 +72,10 @@ func GetCar(ctx *gin.Context) {
 
 	for i, car := range CarDatas {
 		if carID == car.CarID {
+			condition = true
+			carData = CarDatas[i]
+			break
+		} else if carID == "" {
 			condition = true
 			carData = CarDatas[i]
 			break
