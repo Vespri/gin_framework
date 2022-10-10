@@ -11,5 +11,7 @@ func StartServer() *gin.Engine {
 
 	router.POST("/cars", controllers.CreateCar)
 
+	router.PUT("/cars/:carID", controllers.UpdateCar)
+
 	return router
 }
