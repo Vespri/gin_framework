@@ -64,6 +64,21 @@ func UpdateCar(ctx *gin.Context) {
 	})
 }
 
+func GetCarAll(ctx *gin.Context) {
+	condition := true
+
+	if !condition {
+		ctx.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+			"error_status": "Data Not Found",
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"car": CarDatas,
+	})
+}
+
 func GetCar(ctx *gin.Context) {
 	carID := ctx.Param("carID")
 	condition := false
@@ -72,10 +87,6 @@ func GetCar(ctx *gin.Context) {
 
 	for i, car := range CarDatas {
 		if carID == car.CarID {
-			condition = true
-			carData = CarDatas[i]
-			break
-		} else if carID == "" {
 			condition = true
 			carData = CarDatas[i]
 			break
